@@ -117,7 +117,7 @@ Class.forName(this.getInitParameter("매개변수 이름"));
 
 ### 개념
  * 서블릿 실행 전후에 어떤 작업을 하고자 할 때 사용하는 기술
-~~ 이미지 TOBEADDED
+~~이미지 TOBEADDED
 
 ### 구현
  * javax.servlet.Filter 인터페이스 구현
@@ -139,7 +139,7 @@ Class.forName(this.getInitParameter("매개변수 이름"));
  * `destroy()` : 서블릿 컨테이너응 웹 애플리케이션을 종료하기 전에 필터들에 대해 `destroy()`를 호출하여 마무리 작업을 할 수 있는 기회를 줌
 
 ### 생명주기
-~~ 그림 TOBEADDED
+~~그림 TOBEADDED
 
 ### 적용 사례
  * `nextFilter.doFilter()`을 기준으로 사전, 사후로 분류하겠음
