@@ -111,3 +111,67 @@ Class.forName(this.getInitParameter("매개변수 이름"));
  Class.forName(sc.getInintParameter("매개변수 이름"));
  ```
  
+</br>
+
+# 필터
+
+### 개념
+ * 서블릿 실행 전후에 어떤 작업을 하고자 할 때 사용하는 기술
+ * ~~ 이미지 TOBEADDED
+
+### 구현
+ * javax.servlet.Filter 인터페이스 구현
+ * `init()` : 필터 객체가 생성되고 나서 준비 작업을 위해 딱 한 번 호출 / 매개변수는 `FilterConfig` 객체
+ * `doFilter()` : 필터와 연결된 URL에 대해 요청이 들어올 때마다 호출
+ ```
+ public void doFilter(
+     ServeltRequest request, ServletResponse response, FilterChain nextFilter) throws IOException,
+     ServletException{
+         /* 서블릿이 실행되기 전에 해야 할 작업 */
+
+         // 다음 필터 호출. 더이상 필터가 없다면 서블릿의 service()가 호출
+         nextFilter.doFilter(request, response);
+
+         /* 서블릿을 실행한 후, 클라이언트에게 응답하기 전에 해야할 작업 */
+     }
+ )
+ ```
+ * `destroy()` : 서블릿 컨테이너응 웹 애플리케이션을 종료하기 전에 필터들에 대해 `destroy()`를 호출하여 마무리 작업을 할 수 있는 기회를 줌
+
+### 생명주기
+~~ 그림 TOBEADDED
+
+### 적용 사례
+ * `nextFilter.doFilter()`을 기준으로 사전, 사후로 분류하겠음
+ * 사전 작업
+    * 문자집합 설정
+    * 압축해제
+    * 암호화된 데이터 복원
+    * 로그 작성
+    * 사용자 검증
+    * 사용권한 확인
+ * 사후 작업
+    * 응답 데이터 압축
+    * 응답 데이터 암호화
+    * 데이터 형식 변환
+
+### 필터 배치
+ * 선언
+ ```
+<filter>
+    <filter-name>필터 별명</filter-name>
+    <filter-class>필터 클래스 이름(패키지 이름 포함)</filter-class>
+    <filter-param>
+        <param-name>매개변수 이름</param-name>
+        <param-value>값</param-value>
+    </filter-param>
+</filter>
+ ```
+ 
+ * 매핑
+ ```
+<filter-mapping>
+    <filter-name>필터 별명</filter-name>
+    <url-pattern>필터 적용할 URL</url-pattern>
+</filter-mapping>
+ ```
