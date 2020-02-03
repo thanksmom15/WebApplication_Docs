@@ -117,7 +117,7 @@ Class.forName(this.getInitParameter("매개변수 이름"));
 
 ### 개념
  * 서블릿 실행 전후에 어떤 작업을 하고자 할 때 사용하는 기술
- * ~~ 이미지 TOBEADDED
+~~ 이미지 TOBEADDED
 
 ### 구현
  * javax.servlet.Filter 인터페이스 구현
