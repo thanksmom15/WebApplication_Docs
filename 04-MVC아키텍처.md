@@ -58,7 +58,7 @@
 
 ### Service
  * Controller에 의해 호출되어 비즈니스 로직과 트랜잭션 처리
- * DB CRUD를 담당하는 `DAO`객체를 Spring으로부터 주입 받아서, `DA`O에 DB CRUD처리 위임
+ * DB CRUD를 담당하는 `DAO`객체를 Spring으로부터 주입 받아서, `DAO`에 DB CRUD처리 위임
  * 처리 결과를 Controller에게 반환
  * `@Service`, `@Transactional`, `@Autowired`
 
