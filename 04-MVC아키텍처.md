@@ -32,10 +32,44 @@
     * 데이터베이스로부터 질의 결과를 가져와 값 객체로 만들어 반환
     * 값 객체는 객체와 객체 사이에 데이터를 전달하는 용도로 사용 -> 데이터 전송 객체(DTO; Data Transfer Object)라고 부름
  4) **서블릿은 모델 객체로부터 반환받은 값을 JSP에 전달**
- 5) **JSP(View) : 웨 브라우저가 출력할 결과 화면 생성**
+ 5) **JSP(View) : 웹 브라우저가 출력할 결과 화면 생성**
     * 서블릿으로부터 전달받은 값 객체를 참조하여 웹 브라우저에 출력 -> 요청처리 완료
  6) **웹 브라우저는 서버로부터 받은 응답 내용을 화면에 출력**
 
 </br>
 
-#
+# Spring MVC
+~~그림 TOBEADDED~~
+
+### DispatcherServlet
+ * 스프링 프레임워크가 제공하는 서블렛 클래스
+ * 웹 요청과 응답의 Life Cycle 주관
+ * 사용자의 요청을 받아 `HandlerMapping`에 보냄
+
+### HandlerMapping
+ * Controller URL Mapping : 웹 요청 시 해당 URL을 처리할 Controller 결정
+ * 요청 URL에 해당하는 Controller 정보를 저장하는 테이블 가짐
+ * `@RequestMapping("/url")`을 명시하면 해당 URL에 대한 요청이 들어왔을 때 테이블에 저장된 정보에 따라 해당 클래스 또는 메서드에 Mapping
+
+### Controller
+ * 비즈니스 로직 수행(호출)
+ * 결과 데이터를 ModelAndView에 반영
+ * `@Controller`, `@RequestMapping`, `@Autowired`
+
+### Service
+ * Controller에 의해 호출되어 비즈니스 로직과 트랜잭션 처리
+ * DB CRUD를 담당하는 `DAO`객체를 Spring으로부터 주입 받아서, `DA`O에 DB CRUD처리 위임
+ * 처리 결과를 Controller에게 반환
+ * `@Service`, `@Transactional`, `@Autowired`
+
+### DAO
+ * `Service`에 의해 호출되어 쿼리 수행 후 결과 반환
+ * 쿼리를 담당하는 `SqlMapClientTemplate`객체를 Spring으로부터 주입 받아서, `SqlMapClientTemplate`객체에 쿼리 수행 위임
+ * 처리 결과를 `Service`에게 반환
+
+### SqlMapClientTemplate
+ * 스프링 프레임워크가 제공하는 클래스
+ * `DAO`에 의해 호출되어 `SqlMapConfig.xml`의 정보를 이용하여 실제 쿼리문을 읽어와 CRUD 수행 후 결과 반환
+
+### ViewResolver
+ * Controller의 실행 결과를 보여줄 View 검색
